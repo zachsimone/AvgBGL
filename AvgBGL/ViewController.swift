@@ -13,6 +13,12 @@ class ViewController: UIViewController {
     
     var healthStore: HKHealthStore!
 
+    // UI average labels
+    @IBOutlet weak var mostRecentBGL: UILabel!
+    @IBOutlet weak var avgToday: UILabel!
+    @IBOutlet weak var avgSevenDays: UILabel!
+    @IBOutlet weak var avgThreeMonths: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -57,12 +63,25 @@ class ViewController: UIViewController {
                                              sortDescriptors: nil,
                                              resultsHandler: { (query, results, error) in
                                                 
+                                                var total: Double = 0
+                                                var count: Double = 0
+                                                
                                                 for reading in (results as? [HKQuantitySample])! {
                                                     
                                                     let mmol = HKUnit.moleUnit(with: .milli, molarMass: HKUnitMolarMassBloodGlucose)
                                                     let mmolL = mmol.unitDivided(by: HKUnit.liter())
                                                     
                                                     print("Reading as mmol/L \(reading.quantity.doubleValue(for: mmolL)) mmol/L")
+                                                    
+                                                    // Add reading to total
+                                                    total = total + reading.quantity.doubleValue(for: mmolL)
+                                                    // Increment count 
+                                                    count = count + 1
+                                                }
+                                                
+                                                DispatchQueue.main.async {
+                                                    // Update UI on main thread
+                                                    self.avgToday.text = "\(total/count) mmol/L"
                                                 }
                                                 
         })
