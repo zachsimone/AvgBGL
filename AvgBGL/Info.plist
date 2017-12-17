@@ -41,5 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>AvgBGL needs access to your blood glucose levels to calculate averages. </string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>AvgBGL needs access to your blood glucose levels to calculate averages. </string>
 </dict>
 </plist>
