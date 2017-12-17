@@ -16,9 +16,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         
         // Check health data is available
         if HKHealthStore.isHealthDataAvailable() {
@@ -38,8 +35,12 @@ class ViewController: UIViewController {
                 
                 if let error = error { print(error) }
             }
-
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
