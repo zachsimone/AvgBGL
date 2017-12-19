@@ -46,48 +46,32 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        // Start and end dates
-        let startDate = Date().startOfDay // Start of current day
-        let endDate = Date() // The time now
+        // Declare dates
+        let now = Date()
+        let startOfDay = now.startOfDay
+        let sevenDaysAgo = Date(timeIntervalSinceNow: -60*60*24*7) // 60 seconds * 60 mins * 24 hours * 7 days
+        let threeMonthsAgo = Date(timeIntervalSinceNow: -60*60*24*90) // Time 90 days (~3 months) ago
         
-        let predicate = HKQuery.predicateForSamples(withStart: startDate,
-                                                    end: endDate,
-                                                    options: .strictStartDate)
+        // Average today
+        fetchData(startDate: startOfDay, endDate: now) { (data) -> Void in
+            DispatchQueue.main.async(execute: {
+                self.avgToday.text = "\(self.average(values: data)) mmol/L"
+            })
+        }
         
-
-        let bloodGlucose = HKSampleType.quantityType(forIdentifier: .bloodGlucose)
+        // 7-day average
+        fetchData(startDate: sevenDaysAgo, endDate: now) { (data) -> Void in
+            DispatchQueue.main.async(execute: {
+                self.avgSevenDays.text = "\(self.average(values: data)) mmol/L"
+            })
+        }
         
-        let bglQuery = HKSampleQuery.init(sampleType: bloodGlucose!,
-                                             predicate: predicate,
-                                             limit: HKObjectQueryNoLimit,
-                                             sortDescriptors: nil,
-                                             resultsHandler: { (query, results, error) in
-                                                
-                                                var total: Double = 0
-                                                var count: Double = 0
-                                                
-                                                for reading in (results as? [HKQuantitySample])! {
-                                                    
-                                                    let mmol = HKUnit.moleUnit(with: .milli, molarMass: HKUnitMolarMassBloodGlucose)
-                                                    let mmolL = mmol.unitDivided(by: HKUnit.liter())
-                                                    
-                                                    print("Reading as mmol/L \(reading.quantity.doubleValue(for: mmolL)) mmol/L")
-                                                    
-                                                    // Add reading to total
-                                                    total = total + reading.quantity.doubleValue(for: mmolL)
-                                                    // Increment count 
-                                                    count = count + 1
-                                                }
-                                                
-                                                DispatchQueue.main.async {
-                                                    // Update UI on main thread
-                                                    self.avgToday.text = "\(total/count) mmol/L"
-                                                }
-                                                
-        })
-        
-        
-        self.healthStore.execute(bglQuery)
+        // 90-day average
+        fetchData(startDate: threeMonthsAgo, endDate: now) { (data) -> Void in
+            DispatchQueue.main.async(execute: {
+                self.avgThreeMonths.text = "\(self.average(values: data)) mmol/L"
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
