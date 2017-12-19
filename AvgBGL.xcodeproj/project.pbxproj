@@ -14,6 +14,7 @@
 		92CEB14C1FE66A370007CDA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CEB14A1FE66A370007CDA7 /* LaunchScreen.storyboard */; };
 		92CEB1561FE673310007CDA7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CEB1551FE673310007CDA7 /* HealthKit.framework */; };
 		92CEB1581FE9D1EC0007CDA7 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEB1571FE9D1EC0007CDA7 /* Data.swift */; };
+		92CEB15A1FE9DAC50007CDA7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEB1591FE9DAC50007CDA7 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		92CEB1531FE673310007CDA7 /* AvgBGL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AvgBGL.entitlements; sourceTree = "<group>"; };
 		92CEB1551FE673310007CDA7 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		92CEB1571FE9D1EC0007CDA7 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		92CEB1591FE9DAC50007CDA7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				92CEB1411FE66A370007CDA7 /* AppDelegate.swift */,
 				92CEB1431FE66A370007CDA7 /* ViewController.swift */,
 				92CEB1571FE9D1EC0007CDA7 /* Data.swift */,
+				92CEB1591FE9DAC50007CDA7 /* Extensions.swift */,
 				92CEB1451FE66A370007CDA7 /* Main.storyboard */,
 				92CEB1481FE66A370007CDA7 /* Assets.xcassets */,
 				92CEB14A1FE66A370007CDA7 /* LaunchScreen.storyboard */,
@@ -161,6 +164,7 @@
 				92CEB1441FE66A370007CDA7 /* ViewController.swift in Sources */,
 				92CEB1581FE9D1EC0007CDA7 /* Data.swift in Sources */,
 				92CEB1421FE66A370007CDA7 /* AppDelegate.swift in Sources */,
+				92CEB15A1FE9DAC50007CDA7 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

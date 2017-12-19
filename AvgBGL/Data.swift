@@ -52,6 +52,6 @@ extension ViewController {
     func average(values: [Double]) -> Double {
         let sum = values.reduce(0, {$0 + $1})
         let average = Double(sum) / Double(values.count)
-        return average
+        return average.roundToDecimal(2) // Round to 2 decimal places
     }
 }
