@@ -72,6 +72,13 @@ class ViewController: UIViewController {
                 self.avgThreeMonths.text = "\(self.average(values: data)) mmol/L"
             })
         }
+        
+        // Most recent reading
+        mostRecentBgl() { (mostRecent) -> Void in
+            DispatchQueue.main.async(execute: {
+                self.mostRecentBGL.text = "\(self.average(values: [mostRecent])) mmol/L"
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {

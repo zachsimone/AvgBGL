@@ -54,4 +54,22 @@ extension ViewController {
         let average = Double(sum) / Double(values.count)
         return average.roundToDecimal(2) // Round to 2 decimal places
     }
+    
+    func mostRecentBgl(completion: @escaping (_ mostRecent: Double) -> ()) {
+        let bloodGlucose = HKSampleType.quantityType(forIdentifier: .bloodGlucose)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        let mostRecent = HKSampleQuery(sampleType: bloodGlucose!, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+            
+            for reading in (results as? [HKQuantitySample])! {
+                
+                let mmol = HKUnit.moleUnit(with: .milli, molarMass: HKUnitMolarMassBloodGlucose)
+                let mmolL = mmol.unitDivided(by: HKUnit.liter())
+                
+                completion(reading.quantity.doubleValue(for: mmolL))
+                
+            }
+            
+        }
+        healthStore.execute(mostRecent)
+    }
 }
