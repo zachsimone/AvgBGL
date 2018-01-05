@@ -46,6 +46,11 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        // Check health permission - prevents crash
+        guard healthStore.authorizationStatus(for: HKSampleType.quantityType(forIdentifier: .bloodGlucose)!) != .notDetermined else {
+            return
+        }
+        
         // Declare dates
         let now = Date()
         let startOfDay = now.startOfDay
